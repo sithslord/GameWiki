@@ -1,0 +1,9 @@
+
+public class test {
+	
+	
+	JOptionPane.showMessageDialog(null, "³»¿ë");
+
+
+
+}

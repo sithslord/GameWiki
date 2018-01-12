@@ -1,0 +1,6 @@
+package com.sosks1313.command;
+
+public interface BCommand {
+
+	void execute(HttpServletRequest request, HttpServletResponse response);
+}

@@ -1,0 +1,46 @@
+package com.sosks1313.dto;
+
+import java.sql.Timestamp;
+
+public class BDto {
+	
+	int bId;
+	String bName;
+	String bTitle;
+	String bContent;
+	Timestamp bDate;  //timestamp = 특정 시각을 나타내는 문자열, 이떄는 글 작성 시간에 쓰인다.
+	int bHit;
+	int bGroup;
+	int bStep;
+	int bIndent;
+	
+	public BDto(int bId,
+				String bName,
+				String bTitle,
+				String bContent,
+				Timestamp bDate,
+				int bHit,
+				int bGroup,
+				int bStep,
+				int bIndent) {
+		super();
+		this.bId = bId;
+		this.bName = bName;
+		this.bTitle = bTitle;
+		this.bContent = bContent;
+		this.bDate = bDate;
+		this.bHit = bHit;
+		this.bGroup = bGroup;
+		this.bStep = bStep;
+		this.bIndent = bIndent;
+		
+	}//생성자
+	
+	public int getbId() {
+		return bId;
+	}
+	
+	public void setbId(int bId) {
+		this.bId = bId;
+	}
+}
