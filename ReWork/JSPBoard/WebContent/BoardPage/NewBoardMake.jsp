@@ -9,7 +9,7 @@
 <body>
 
 	<table width="1024" cellpadding = "2" cellspacing = "2" border = "0" align="center">
-		<form action="makeboard.do" method="post">
+		<form action="makeboard.go" method="post">
 			
 			<tr>
 				<td>Á¦¸ñ</td>

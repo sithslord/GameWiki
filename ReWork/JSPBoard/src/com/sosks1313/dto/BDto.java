@@ -14,6 +14,9 @@ public class BDto {
 	int bStep;
 	int bIndent;
 	
+	String bdTitle;
+
+	
 	public BDto(int bId,
 				String bName,
 				String bTitle,
@@ -22,7 +25,8 @@ public class BDto {
 				int bHit,
 				int bGroup,
 				int bStep,
-				int bIndent) {
+				int bIndent
+				) {
 		super();
 		this.bId = bId;
 		this.bName = bName;
@@ -34,7 +38,15 @@ public class BDto {
 		this.bStep = bStep;
 		this.bIndent = bIndent;
 		
+		
+		
 	}//»ý¼ºÀÚ
+	
+	public BDto(String bdTitle) {
+		super();
+		
+		this.bdTitle = bdTitle;
+	}
 	
 	public int getbId() {
 		return bId;
@@ -108,5 +120,11 @@ public class BDto {
 		this.bIndent = bIndent;
 	}
 	
-	
+	public String getbdTitle() {
+		return bdTitle;
+	}
+	public void setbdTitle(String bdTitle) {
+		this.bdTitle = bdTitle;
+	}
+
 }

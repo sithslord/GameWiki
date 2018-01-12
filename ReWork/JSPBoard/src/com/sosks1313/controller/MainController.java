@@ -15,6 +15,7 @@ import com.sosks1313.command.BDeleteCommand;
 import com.sosks1313.command.BListCommand;
 import com.sosks1313.command.BModifyCommand;
 import com.sosks1313.command.BModifyComplete;
+import com.sosks1313.command.BNewsCommand;
 import com.sosks1313.command.BWriteCommand;
 
 /**
@@ -106,6 +107,13 @@ public class MainController extends HttpServlet {
 			command.execute(request, response);
 			
 			viewPage = "delete_complete.jsp";
+		}else if(comm.equals("main.do")) {
+			command = new BNewsCommand();
+			command.execute(request, response);
+			
+			viewPage = "../MainPage/Main.jsp";
+		}else if(comm.equals("makeboard.do")) {
+			viewPage = "/BoardPage/NewBoardMake.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);  //requestdispatcher = request에 담겨있는 정보를 다른 jsp의 리스폰스에 전달 할 수 있다.
