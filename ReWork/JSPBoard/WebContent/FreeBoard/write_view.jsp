@@ -5,10 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script src="../js/jquery-3.2.1.min.js"></script>
+
 </head>
 <body>
-	<table width="1024" cellpadding = "2" cellspacing = "2" border = "0" align="center">
+	<table width="800" cellpadding = "2" cellspacing = "2" border = "0" align="center">
 		<form action="write.do" method="post"> <!-- submit버튼을 누를시 write.do로 반환된다 -->
+		<input type="hidden" name="bdId" value="${write_view.bdId }">
+		
 			<tr>
 				<td>이름</td>
 				<td><input type="text" name="bName" size="10"></td>
@@ -24,11 +28,15 @@
 			<tr>
 				<td colspan="2"> <!-- 셀합치기 -->
 					<input type="submit" value="입력">&nbsp;&nbsp;
-					<a href="list.do">목록보기</a>	
+					<a href="viewFreeboard.do">목록보기</a>	
 				</td>
 			</tr>	
 		</form>
 	</table>
+	<script>
+		self.resizeTo(document.body.scrollWidth, document.body.scrollHeight + 10);
+	</script>
+	
 
 </body>
 </html>

@@ -93,11 +93,23 @@ body{
 	<div id="info">
 		<h2 align="center">환영합니다</h2>
 		
-		<p>구현한 기능: 게시판 db 테이블 만들기, 각 페이지 기본 폼</p>
+		<p><strong>구현한 기능:</strong> 게시판 db 테이블 만들기, 각 페이지 기본 폼(180112)</p>
+		<p>만든게시판 들어가기(180115)</p>
+		<p>네이버 스마트 에디터 드디어 적용(180115)</p>
+		<p>iframe 자동 리사이징 (180115)</p>
+		<p>iframe에 자유게시판 띄우기(180115)</p>
+		<p>만든 게시판의 db 테이블 생성(180115)</p>
 		
-		<p>구현중인 기능: 만든 게시판 들어가기...</p>
+		</br>
+		<p><strong>구현중인 기능:</strong> 만든 게시판에서 메뉴추가...</p>
+		<p>네이버 스마트 에디터 사진 업로드...</p>
+		<p>게시판 별 자유게시판 분할....</p>
+		</br>
 		
-		<p>보류중인 기능: 검색, 로그인</p>
+		<p><strong>문제:</strong> crate테이블 작동안함(테이블 이름에 ' ' 가 입력되어 쿼리 오류)...(180117)(해결)</p>
+		<p>한글 입력이 ??? 로 표시(180117)</p>
+		</br>
+		<p><strong>보류중인 기능:</strong> 검색, 로그인</p>
 	
 	
 	</div>
@@ -105,7 +117,7 @@ body{
 	<div id="news">
 		<h3 align="center">게시판 목록</h3>
 		<c:forEach items="${news }" var="dto">
-			<p><a href="board_view.do?bdTitle=${dto.bdTitle }">${dto.bdTitle }</a></p>
+			<p><a href="board_view.do?bdId=${dto.bdId }">${dto.bdTitle }</a></p>
 		</c:forEach>
 		
 		<p>갱신사항 공사중</p>

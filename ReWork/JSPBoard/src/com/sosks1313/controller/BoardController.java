@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sosks1313.command.BCommand;
+import com.sosks1313.dto.BDto;
 
 /**
  * Servlet implementation class BoardController
@@ -47,6 +48,7 @@ public class BoardController extends HttpServlet {
 	}
 	
 	protected void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("EUC-KR");
 		
 		String viewPage = null;
@@ -62,7 +64,7 @@ public class BoardController extends HttpServlet {
 		if(comm.equals("makeboard.go")) {
 		
 			Connection connection = null;
-			PreparedStatement preparedStatement = null;
+			PreparedStatement preparedStatement, preparedStatement2, preparedStatement3, preparedStatement4 = null;
 			ResultSet resultSet = null;
 		
 		
@@ -78,24 +80,44 @@ public class BoardController extends HttpServlet {
 			
 				resultSet = preparedStatement.executeQuery();
 			
-				while(resultSet.next()) {
-					if(resultSet.getString("bdTitle").equals(bdTitle)) {
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/BoardPage/OverlapbdTitle.jsp");
-						dispatcher.forward(request, response);
-						
-						break;
-					}
+				
 					String query2 = "INSERT INTO newboard(bdTitle) VALUE(?)";
-					preparedStatement = connection.prepareStatement(query2);
-					preparedStatement.setString(1, bdTitle);
+					preparedStatement2 = connection.prepareStatement(query2);
+					preparedStatement2.setString(1, bdTitle);
 
-					int rn = preparedStatement.executeUpdate();
+					int rn = preparedStatement2.executeUpdate();
+					
+				
+					String query4 = "CREATE TABLE ";
+					String query4_1 = " (bid INT(4) NOT NULL AUTO_INCREMENT PRIMARY KEY, bName VARCHAR(20), bTitle VARCHAR(100), bContent VARCHAR(500), bDATE DATETIME DEFAULT CURRENT_TIMESTAMP, bHit INT(4) DEFAULT 0, bGroup INT(4), bStep INT(4), bIndent INT(4), bdId INT(4) NOT NULL)";
+					
+					String bdTitle_nospace = bdTitle.replaceAll(" ", "");
+					
+					String createTable = query4 + bdTitle_nospace + query4_1;
+					
+					System.out.println(createTable);
+					preparedStatement3 = connection.prepareStatement(createTable);
+					
+					int rn2 = preparedStatement3.executeUpdate();
+					
+					
+					/*
+					String query5 = "UPDATE ";
+					
+					String query5_1 = ", newboard SET ?.bdId = newboard";
+					String selectbdId = query5 + bdTitle_nospace + query5_1;
+					preparedStatement4 = connection.prepareStatement(selectbdId);
+					preparedStatement4.setString(1, bdTitle);
+
+					int rn3 = preparedStatement4.executeUpdate();
+*/
+					
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/BoardPage/SuccessNewBoard.jsp");
 					dispatcher.forward(request, response);
 
 					
 				
-				}
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/BoardPage/OverlapbdTitle.jsp");
@@ -104,7 +126,7 @@ public class BoardController extends HttpServlet {
 			}finally {
 				try {
 				
-					if(preparedStatement!=null) preparedStatement.close();
+					if(preparedStatement4!=null) preparedStatement4.close();
 					if(resultSet!=null) resultSet.close();
 					if(connection!=null) connection.close();
 				

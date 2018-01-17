@@ -8,10 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>자유게시판</title>
+<script src="../js/jquery-3.2.1.min.js"></script>
+
 </head>
 <body>
+	<h1>${board_view.bdTitle }</h1>
 
-	<table width="1024" cellpadding = "0" cellspacing = "0" border = "1" align="center">
+	<table width="800" cellpadding = "0" cellspacing = "0" border = "1" align="center">
 		<tr align="center">
 			<td>번호</td>
 			<td width="100">이름</td>
@@ -19,7 +22,7 @@
 			<td>날짜</td>
 			<td>조회수</td>
 		</tr>
-	<c:forEach items="${list }" var="dto">
+	<c:forEach items="${bdlist }" var="dto">
 		<tr>
 			<td align="center">${dto.bId }</td>
 			<td>${dto.bName }</td>
@@ -32,9 +35,10 @@
 		</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="5"><a href="write_view.do">글작성</a></td>
+		<td colspan="5"><a href="write_view.do?bdId=${dto.bdId }">글작성</a></td>
 	</tr>
 	</table>
+
 
 </body>
 </html>

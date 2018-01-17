@@ -15,6 +15,7 @@ public class BDto {
 	int bIndent;
 	
 	String bdTitle;
+	int bdId;
 
 	
 	public BDto(int bId,
@@ -25,7 +26,8 @@ public class BDto {
 				int bHit,
 				int bGroup,
 				int bStep,
-				int bIndent
+				int bIndent,
+				int bdId
 				) {
 		super();
 		this.bId = bId;
@@ -37,15 +39,17 @@ public class BDto {
 		this.bGroup = bGroup;
 		this.bStep = bStep;
 		this.bIndent = bIndent;
+		this.bdId = bdId;
 		
 		
 		
 	}//»ý¼ºÀÚ
 	
-	public BDto(String bdTitle) {
+	public BDto(String bdTitle, int bdId) {
 		super();
 		
 		this.bdTitle = bdTitle;
+		this.bdId = bdId;
 	}
 	
 	public int getbId() {
@@ -125,6 +129,13 @@ public class BDto {
 	}
 	public void setbdTitle(String bdTitle) {
 		this.bdTitle = bdTitle;
+	}
+	public int getbdId() {
+		return bdId;
+	}
+	
+	public void setbdId(int bdId) {
+		this.bdId = bdId;
 	}
 
 }

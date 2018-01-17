@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sosks1313.command.BBoardViewCommand;
 import com.sosks1313.command.BCommand;
 import com.sosks1313.command.BContentCommand;
 import com.sosks1313.command.BDeleteCommand;
@@ -16,6 +17,7 @@ import com.sosks1313.command.BListCommand;
 import com.sosks1313.command.BModifyCommand;
 import com.sosks1313.command.BModifyComplete;
 import com.sosks1313.command.BNewsCommand;
+import com.sosks1313.command.BViewFreeBoardCommand;
 import com.sosks1313.command.BWriteCommand;
 
 /**
@@ -70,16 +72,17 @@ public class MainController extends HttpServlet {
 			command.execute(request, response); 
 			
 			viewPage = "list.jsp";
+			
 		}else if(comm.equals("write_view.do")){ //글작성 선택시 글작성 페이지로 이동
 			
-			viewPage="write_view.jsp";
+			viewPage="../FreeBoard/write_view.jsp";
 			
 		}else if(comm.equals("write.do")){ //글작성 페이지에서 입력을 눌렸을때
 			
 			command = new BWriteCommand();
 			command.execute(request, response);
 			
-			viewPage = "list.do"; //목록으로 돌아온다
+			viewPage = "viewFreeboard.do"; //목록으로 돌아온다
 			
 		}else if(comm.equals("content_view.do")) {
 			command = new BContentCommand();
@@ -100,7 +103,7 @@ public class MainController extends HttpServlet {
 			command = new BModifyComplete();
 			command.execute(request, response);
 			
-			viewPage = "list.do";
+			viewPage = "viewFreeboard.do";
 		}else if(comm.equals("delete.do")) {
 			
 			command = new BDeleteCommand();
@@ -114,7 +117,18 @@ public class MainController extends HttpServlet {
 			viewPage = "../MainPage/Main.jsp";
 		}else if(comm.equals("makeboard.do")) {
 			viewPage = "/BoardPage/NewBoardMake.jsp";
+		}else if(comm.equals("board_view.do")){
+			command = new BBoardViewCommand();
+			command.execute(request, response);
+			
+			viewPage = "../BoardPage/BoardMain.jsp";
+		}else if(comm.equals("viewFreeboard.do")) {
+			command = new BViewFreeBoardCommand();
+			command.execute(request, response);
+			
+			viewPage = "../FreeBoard/list.jsp";
 		}
+				
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);  //requestdispatcher = request에 담겨있는 정보를 다른 jsp의 리스폰스에 전달 할 수 있다.
 		dispatcher.forward(request, response);

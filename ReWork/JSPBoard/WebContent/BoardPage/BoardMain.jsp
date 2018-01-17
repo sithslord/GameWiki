@@ -4,8 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>db에서 값 가져오기</title>
-<style type/css>
+<title>${board_view.bdTitle }</title>
+<script src="../js/jquery-3.2.1.min.js"></script>
+
+
+<style type="text/css">
 *{
 	margin: 5px;
 	padding: 0;
@@ -39,7 +42,7 @@ body{
 	border-right: 1px solid black;
 }
 
-#wrap{
+#wrap, iframe{
 	float: right;
 	width: 1000px;
 }
@@ -57,31 +60,55 @@ body{
 	margin-left: 550px;
 }
 </style>
+<script type="text/javascript">
+$(function(){
+	
+	$('#navi a').click(function(){
+		$('#iframe').attr('src', $(this).attr('data-url'));
+	});
+	
+	function doResize(){
+		var the_height=document.getElementById('iframe').contentWindow.document.body.scrollHeight;
+		
+		document.getElementById('iframe').height=the_height;
+		
+		document.getElementById('iframe').style.overflow = "hidden";
+	}
+
+
+	
+});
+</script>
+
+
 </head>
 <body>
+
 	<div id="banner">
-		<a class="hyper" href="BoardMain.jst"><h1>${dto.bdTitle}</h1></a><!-- href 수정요망 -->
+		<a class="hyper" href="board_view.do?bdId=${board_view.bdId }"><h1>${board_view.bdTitle }</h1></a><!-- href 수정요망 -->
 		<div id="serLog">
 			<form action="search" method="post">
 				<input type="text" name="srch" size="30">
 				<input type="submit" value="검색">
 			</form>
 		
-			<form action="login" method="post">
-				<input type="submit" value="로그인">
+			<form action="main.do" method="post">
+				<input type="submit" value="메인으로">
 			</form>
 		</div>
 	</div>
 	
 	<div id="navi">
-		<c:forEach begin="1" end="${dto.bdIndent }">-</c:forEach>
-		<a href="load_Content.do?bdTitle=${dto.bdId} }">${bto.bdTitle }</a>
-		
 	
+		<c:forEach></c:forEach>
+		<a href="board_view.do?bdId=${board_view.bdId }">${board_view.bdTitle }</a></br> <!-- 메뉴 추가 기능 -->
+		<a href="#" data-url="viewFreeboard.do?bdTitle=${board_view.bdTitle}">자유게시판</a></br>
+		<a href="menuMake.do?bdId=${board_view.bdId }">메뉴 편집</a>	
+			
 	</div>
 	
 	<div id="wrap">
-		<iframe src=''></iframe>
+		<iframe id="iframe" src=''  onload="doResize()" frameborder="0" scrolling="no" style="overflow-x:hidden; overflow:auto; width:100%; min-height:500px;"></iframe>
 	</div>
 	
 	
