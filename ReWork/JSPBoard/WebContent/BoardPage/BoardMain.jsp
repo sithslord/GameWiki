@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<% request.setCharacterEncoding("euc-kr"); %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -102,7 +104,7 @@ $(function(){
 	
 		<c:forEach></c:forEach>
 		<a href="board_view.do?bdId=${board_view.bdId }">${board_view.bdTitle }</a></br> <!-- 메뉴 추가 기능 -->
-		<a href="#" data-url="viewFreeboard.do?bdTitle=${board_view.bdTitle}">자유게시판</a></br>
+		<a href="#" data-url="viewfreeboard.do?bdTitle=${board_view.bdTitle }">자유게시판</a></br>
 		<a href="menuMake.do?bdId=${board_view.bdId }">메뉴 편집</a>	
 			
 	</div>

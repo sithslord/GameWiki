@@ -19,6 +19,7 @@ import com.sosks1313.command.BModifyComplete;
 import com.sosks1313.command.BNewsCommand;
 import com.sosks1313.command.BViewFreeBoardCommand;
 import com.sosks1313.command.BWriteCommand;
+import com.sosks1313.command.BWriteViewCommand;
 
 /**
  * Servlet implementation class MainController
@@ -48,7 +49,7 @@ public class MainController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("EUC-KR");
 		actionDo(request, response);
 	}
 	
@@ -74,21 +75,23 @@ public class MainController extends HttpServlet {
 			viewPage = "list.jsp";
 			
 		}else if(comm.equals("write_view.do")){ //글작성 선택시 글작성 페이지로 이동
+			command = new BWriteViewCommand();
+			command.execute(request, response);
 			
-			viewPage="../FreeBoard/write_view.jsp";
+			viewPage="/FreeBoard/write_view.jsp";
 			
 		}else if(comm.equals("write.do")){ //글작성 페이지에서 입력을 눌렸을때
 			
 			command = new BWriteCommand();
 			command.execute(request, response);
 			
-			viewPage = "viewFreeboard.do"; //목록으로 돌아온다
+			viewPage = "viewfreeboard.do"; //목록으로 돌아온다
 			
 		}else if(comm.equals("content_view.do")) {
 			command = new BContentCommand();
 			command.execute(request, response);
 			
-			viewPage = "content_view.jsp";
+			viewPage = "/FreeBoard/content_view.jsp";
 			
 		}else if(comm.equals("modify.do")){
 			
@@ -96,37 +99,37 @@ public class MainController extends HttpServlet {
 			command.execute(request, response);
 
 			
-			viewPage = "modify.jsp";
+			viewPage = "/FreeBoard/modify.jsp";
 			
 		}else if(comm.equals("modifyComplete.do")) {
 			
 			command = new BModifyComplete();
 			command.execute(request, response);
 			
-			viewPage = "viewFreeboard.do";
+			viewPage = "/FreeBoard/viewfreeboard.do";
 		}else if(comm.equals("delete.do")) {
 			
 			command = new BDeleteCommand();
 			command.execute(request, response);
 			
-			viewPage = "delete_complete.jsp";
+			viewPage = "/FreeBoard/delete_complete.jsp";
 		}else if(comm.equals("main.do")) {
 			command = new BNewsCommand();
 			command.execute(request, response);
 			
-			viewPage = "../MainPage/Main.jsp";
+			viewPage = "/MainPage/Main.jsp";
 		}else if(comm.equals("makeboard.do")) {
 			viewPage = "/BoardPage/NewBoardMake.jsp";
 		}else if(comm.equals("board_view.do")){
 			command = new BBoardViewCommand();
 			command.execute(request, response);
 			
-			viewPage = "../BoardPage/BoardMain.jsp";
-		}else if(comm.equals("viewFreeboard.do")) {
+			viewPage = "/BoardPage/BoardMain.jsp";
+		}else if(comm.equals("viewfreeboard.do")) {
 			command = new BViewFreeBoardCommand();
 			command.execute(request, response);
 			
-			viewPage = "../FreeBoard/list.jsp";
+			viewPage = "/FreeBoard/list.jsp";
 		}
 				
 		

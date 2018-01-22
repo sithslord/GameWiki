@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="/se2/js/HuskyEZCreater.js" charset="utf-8"></script>
+</head>
+<body>
+
+<textarea name="content" rows="22" id="content" style="width:645px;"></textarea>
+
+<script type="text/javascript">
+	var oEditors=[];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "content",
+		sSkinURI: "/se2/SmartEditor2Skin.html",
+		fCreator: "createSEditor2"
+	
+	});
+</script>
+
+</body>
+</html>

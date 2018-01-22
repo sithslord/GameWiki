@@ -70,6 +70,10 @@ public class BoardController extends HttpServlet {
 		
 		
 			String bdTitle = request.getParameter("bdTitle");
+			
+			
+			System.out.println("bdTitle at makeboard: " + bdTitle);
+
 		
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
@@ -89,7 +93,7 @@ public class BoardController extends HttpServlet {
 					
 				
 					String query4 = "CREATE TABLE ";
-					String query4_1 = " (bid INT(4) NOT NULL AUTO_INCREMENT PRIMARY KEY, bName VARCHAR(20), bTitle VARCHAR(100), bContent VARCHAR(500), bDATE DATETIME DEFAULT CURRENT_TIMESTAMP, bHit INT(4) DEFAULT 0, bGroup INT(4), bStep INT(4), bIndent INT(4), bdId INT(4) NOT NULL)";
+					String query4_1 = " (bId INT(4) NOT NULL AUTO_INCREMENT PRIMARY KEY, bName VARCHAR(20), bTitle VARCHAR(100), bContent VARCHAR(500), bDATE DATETIME DEFAULT CURRENT_TIMESTAMP, bHit INT(4) DEFAULT 0, bGroup INT(4), bStep INT(4), bIndent INT(4))charset=euckr";
 					
 					String bdTitle_nospace = bdTitle.replaceAll(" ", "");
 					

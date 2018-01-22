@@ -12,11 +12,12 @@ public class BModifyCommand implements BCommand{
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String bId = request.getParameter("bId");
-		
+		String bdTitle = request.getParameter("bdTitle");	
 		bDao dao = new bDao();
-		BDto dto = dao.modify(bId);
+		BDto dto = dao.modify(bId, bdTitle);
 		
 		request.setAttribute("modify", dto);
+		request.setAttribute("bdTitle", bdTitle);
 	}
 
 }

@@ -12,11 +12,13 @@ public class BContentCommand implements BCommand{
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String bId = request.getParameter("bId");
+		String bdTitle = request.getParameter("bdTitle");
 		
 		bDao dao = new bDao();
-		BDto dto = dao.contentView(bId);
+		BDto dto = dao.contentView(bId, bdTitle);
 		
 		request.setAttribute("content_view", dto);
+		request.setAttribute("bdTitle", bdTitle);
 		
 	}
 

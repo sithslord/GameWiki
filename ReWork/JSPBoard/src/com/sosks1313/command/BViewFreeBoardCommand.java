@@ -12,21 +12,17 @@ public class BViewFreeBoardCommand implements BCommand{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		try {
-		request.setCharacterEncoding("EUC-KR");
-
-		String bdTitle = request.getParameter("bdTitle");
 		
-		System.out.println("bdTitle at command: " + bdTitle);
-		bDao dao = new bDao();
-		
-		ArrayList<BDto> dtos = dao.viewfreeboard(bdTitle);
-		
-		request.setAttribute("bdlist", dtos);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+			String bdTitle = request.getParameter("bdTitle");
+			
+			bDao dao = new bDao();
+			
+			ArrayList<BDto> dtos = dao.viewfreeboard(bdTitle);
+			
+			
+			request.setAttribute("bdlist", dtos);
+			request.setAttribute("bdTitle", bdTitle);
+	
 		
 	}
-
 }

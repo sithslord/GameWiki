@@ -12,4 +12,10 @@
     <fullyQualifiedTypeName name="java.awt.Frame"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException"/>
+    <fullyQualifiedTypeName name="com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException"/>
+    <fullyQualifiedTypeName name="java.net.URLDecoder"/>
+    <fullyQualifiedTypeName name="java.net.URLEncoder"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="com.sosks1313.dao.bDao"/>
 </qualifiedTypeNameHistroy>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<% request.setCharacterEncoding("euc-kr"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- JSTL 사용설정 --%>
 
@@ -12,9 +13,8 @@
 
 </head>
 <body>
-	<h1>${board_view.bdTitle }</h1>
 
-	<table width="800" cellpadding = "0" cellspacing = "0" border = "1" align="center">
+	<table width="970" cellpadding = "0" cellspacing = "0" border = "1" align="center">
 		<tr align="center">
 			<td>번호</td>
 			<td width="100">이름</td>
@@ -27,15 +27,15 @@
 			<td align="center">${dto.bId }</td>
 			<td>${dto.bName }</td>
 			<td>
-			<c:forEach begin="1" end="${dto.bIndent }">-</c:forEach>
-			<a href="content_view.do?bId=${dto.bId }">${dto.bTitle }</a>
+				<c:forEach begin="1" end="${dto.bIndent }">-</c:forEach>
+				<a href="content_view.do?bId=${dto.bId }&bdTitle=${bdTitle }">${dto.bTitle }</a>
 			</td>
 			<td>${dto.bDate }</td>
 			<td align="center">${dto.bHit }</td>
 		</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="5"><a href="write_view.do?bdId=${dto.bdId }">글작성</a></td>
+		<td colspan="5"><a href="write_view.do?bdTitle=${bdTitle }">글작성</a></td>
 	</tr>
 	</table>
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<% request.setCharacterEncoding("euc-kr"); %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +13,7 @@
 <body>
 	<table width="800" cellpadding = "2" cellspacing = "2" border = "0" align="center">
 		<form action="write.do" method="post"> <!-- submit버튼을 누를시 write.do로 반환된다 -->
-		<input type="hidden" name="bdId" value="${write_view.bdId }">
+		<input type="hidden" name="bdTitle" value="${bdTitle }">
 		
 			<tr>
 				<td>이름</td>

@@ -11,17 +11,15 @@ public class BWriteCommand implements BCommand{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		String bdTitle = request.getParameter("bdTitle");
 		String bName = request.getParameter("bName"); //write_view 글작성에서 작성한 input값을 가져온다
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bContent");
-		String bdId = request.getParameter("bdId");
 		
 		bDao dao = new bDao(); //bDao 객체 생성
-		BDto dto = dao.boardView(bdId);
 
-		request.setAttribute("write_view", dto);
 		
-		dao.write(bName, bTitle, bContent, bdId); //bDao의 write메소드 실생
+		dao.write(bdTitle, bName, bTitle, bContent); //bDao의 write메소드 실생
 		
 	}
 

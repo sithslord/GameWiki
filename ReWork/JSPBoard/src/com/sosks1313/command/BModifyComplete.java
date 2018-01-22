@@ -14,10 +14,11 @@ public class BModifyComplete implements BCommand{
 		String bName = request.getParameter("bName");
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bContent");
+		String bdTitle = request.getParameter("bdTitle");
 		
 		bDao dao = new bDao();
 		
-		dao.modifyComplete(bId, bName, bTitle, bContent);
+		dao.modifyComplete(bId, bName, bTitle, bContent, bdTitle);
 		
 		
 	}

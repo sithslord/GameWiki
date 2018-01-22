@@ -10,7 +10,7 @@
 
 	<h1 align="center">글이 삭제되었습니다.</h1>
 	
-	<a href="list.do">목록으로 가기</a>
+	<a href="viewfreeboard.do?bdTitle=${bdTitle }">목록으로 가기</a>
 
 </body>
 </html>

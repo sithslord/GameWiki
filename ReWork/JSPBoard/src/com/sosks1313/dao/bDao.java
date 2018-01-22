@@ -1,7 +1,5 @@
 package com.sosks1313.dao;
 
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -67,23 +65,30 @@ public class bDao{
 	}//list()
 	*/
 	
-	public void write(String bName, String bTitle, String bContent, String bdId) {
+	
+	
+	public void write(String bdTitle, String bName, String bTitle, String bContent) {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		
+		String bdTitle_nospace = bdTitle.replaceAll(" ", "");;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); //mysql jdbc 드라이버 로딩
 			connection = DriverManager.getConnection("jdbc:mySql://localhost:3306/freeboard", "test", "sky0595");
 			
-			String query = "INSERT INTO mvcboard(bName, bTitle, bContent, bdId, bHit, bGroup, bStep, bIndent) VALUES(?, ?, ?, 0, (select * from(select max(bId)+1 from mvcboard) as temp), 0, 0)"; //각 변수의 값을 테이블에 추가하는 쿼리문  
+			String query = "INSERT INTO ";
 			
-			preparedStatement = connection.prepareStatement(query);
+			String query_1 = " (bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) VALUES(?, ?, ?, 0, (select * from(select max(bId)+1 from ";
+			String query_2 =") as temp), 0, 0)"; //각 변수의 값을 테이블에 추가하는 쿼리문  
+			String finalquery = query + bdTitle_nospace + query_1 + bdTitle_nospace + query_2;
+			System.out.println("write: " + finalquery);
+			preparedStatement = connection.prepareStatement(finalquery);
 
 			preparedStatement.setString(1, bName); //첫번째 벨류(=?)에 넣을값= bNmame
 			preparedStatement.setString(2, bTitle);
 			preparedStatement.setString(3, bContent);
-			preparedStatement.setInt(4, Integer.parseInt(bdId));
 
 			int rn = preparedStatement.executeUpdate(); //리턴이 있다면 작용한 열의 갯수 반환, 없다면 0을 반환한다.
 		}catch(Exception e) {
@@ -99,11 +104,13 @@ public class bDao{
 		
 	}//write
 	
-	public BDto contentView(String strId) {
+	public BDto contentView(String strId, String bdTitle) {
 		
-		upHit(strId);
+		upHit(strId, bdTitle);
 		
 		BDto dto = null;
+		
+		String bdTitle_nospace = bdTitle.replaceAll(" ", "");
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -113,8 +120,10 @@ public class bDao{
 			Class.forName("com.mysql.jdbc.Driver"); //mysql jdbc 드라이버 로딩
 			connection = DriverManager.getConnection("jdbc:mySql://localhost:3306/freeboard", "test", "sky0595");
 			
-			String query = "SELECT * FROM mvcboard WHERE bId=?"; //db에서 해당 bId을 가진 데이터를 가져온다  
-			preparedStatement = connection.prepareStatement(query);
+			String query = "SELECT * FROM ";
+			String query_1 = " WHERE bId=?"; //db에서 해당 bId을 가진 데이터를 가져온다  
+			String finalquery = query + bdTitle_nospace + query_1;
+			preparedStatement = connection.prepareStatement(finalquery);
 			preparedStatement.setInt(1,  Integer.parseInt(strId));
 			resultSet = preparedStatement.executeQuery();
 			
@@ -128,9 +137,8 @@ public class bDao{
 				int bGroup = resultSet.getInt("bGroup");
 				int bStep = resultSet.getInt("bStep");
 				int bIndent = resultSet.getInt("bIndent");
-				int bdId = resultSet.getInt("bdId");
 				
-				dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent, bdId);
+				dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -148,20 +156,24 @@ public class bDao{
 		return dto; //dto 값을 반환한다.
 	} //contentView
 	
-	public void upHit(String bId) {
+	public void upHit(String bId, String bdTitle) {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		
+		String bdTitle_nospace = bdTitle.replaceAll(" ", "");
 		
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
 			
-			String query = "UPDATE mvcboard SET bHit = bHit + 1 WHERE bId = ?";
-			
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, bId);
+			String query = "UPDATE ";
+			String query_1 = " SET bHit = bHit + 1 WHERE bId = ?";
+			String finalquery = query + bdTitle_nospace + query_1;
+			System.out.println("UPHIT: " +finalquery);
+			preparedStatement = connection.prepareStatement(finalquery);
+			preparedStatement.setInt(1, Integer.parseInt(bId));
 			
 			int rn = preparedStatement.executeUpdate();
 			
@@ -179,9 +191,11 @@ public class bDao{
 		}
 	}//upHit
 	
-	public BDto modify(String strId) {
+	public BDto modify(String strId, String bdTitle) {
 		
 		BDto dto = null;
+		String bdTitle_nospace = bdTitle.replaceAll(" ", "");
+
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -191,9 +205,12 @@ public class bDao{
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
 		
-			String query = "SELECT * FROM mvcboard WHERE bId=?";
+			String query = "SELECT * FROM ";
+			String query_1 = " WHERE bId=?";
+			
+			String finalquery = query + bdTitle_nospace + query_1;
 		
-			preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(finalquery);
 			preparedStatement.setInt(1, Integer.parseInt(strId));
 			resultSet = preparedStatement.executeQuery();
 			
@@ -208,9 +225,8 @@ public class bDao{
 				int bGroup = resultSet.getInt("bGroup");
 				int bStep = resultSet.getInt("bStep");
 				int bIndent = resultSet.getInt("bIndent");
-				int bdId = resultSet.getInt("bdId");
 				
-				dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent, bdId);
+				dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
 			}
 			
 		}catch(Exception e) {
@@ -228,18 +244,24 @@ public class bDao{
 		return dto;
 	} //modify()
 	
-	public void modifyComplete(String bId, String bName, String bTitle, String bContent) {
+	public void modifyComplete(String bId, String bName, String bTitle, String bContent, String bdTitle) {
 		
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		
+		String bdTitle_nospace = bdTitle.replaceAll(" ", "");
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
 		
-			String query = "UPDATE mvcboard SET bTitle=?, bContent=? WHERE bId=?";
+			String query = "UPDATE ";
+			String query_1 = " SET bTitle=?, bContent=? WHERE bId=?";
 		
-			preparedStatement = connection.prepareStatement(query);
+			String finalquery = query + bdTitle_nospace + query_1;
+
+			preparedStatement = connection.prepareStatement(finalquery);
 			preparedStatement.setString(1, "(수정)"+bTitle);
 			preparedStatement.setString(2, bContent);
 			preparedStatement.setInt(3, Integer.parseInt(bId));
@@ -260,17 +282,26 @@ public class bDao{
 		}
 	} //modifyComplete() 
 	
-	public void delete(String bId) {
+	public void delete(String bId, String bdTitle) {
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
+		
+		String bdTitle_nospace = bdTitle.replaceAll(" ", "");
+		
+		System.out.println("delete bId: " + bId);
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
 		
-			String query ="DELETE FROM mvcboard WHERE bId = ?";
-			preparedStatement = connection.prepareStatement(query);
+			String query ="DELETE FROM ";
+			String query_1 = " WHERE bId = ?";
+			String finalquery = query + bdTitle_nospace + query_1;
+			
+			System.out.println("delete query: " + finalquery);
+			
+			preparedStatement = connection.prepareStatement(finalquery);
 			preparedStatement.setInt(1, Integer.parseInt(bId));
 			
 			int rn = preparedStatement.executeUpdate();
@@ -383,7 +414,7 @@ public BDto boardView(String strId) {
 			preparedStatement.setInt(1, Integer.parseInt(strId));
 			resultSet = preparedStatement.executeQuery();
 
-			if(resultSet.next()) {
+			while(resultSet.next()) {
 
 				int bdId = resultSet.getInt("bdId");
 				String bdTitle  = resultSet.getString("bdTitle");		
@@ -411,7 +442,6 @@ public BDto boardView(String strId) {
 		
 		ArrayList<BDto> dtos = new ArrayList<BDto>();
 	
-	
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -420,14 +450,17 @@ public BDto boardView(String strId) {
 			Class.forName("com.mysql.jdbc.Driver"); //mysql jdbc 드라이버 로딩
 			connection = DriverManager.getConnection("jdbc:mySql://localhost:3306/freeboard", "test", "sky0595");
 		
-			String query = "SELECT bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent, bdId FROM ";
-			String bdTitle_nospace = strTitle.replaceAll(" ", "");		
-			String query_1 = " ORDER BY bGroup DESC, bStep ASC"; //db에서 해당 bId을 가진 데이터를 가져온다  
+			String query = "SELECT * FROM ";
+			String bdTitle_nospace = strTitle.replaceAll(" ", "");	
+			String query_1 = " ORDER BY bId DESC";
 			String query_final = query + bdTitle_nospace + query_1;
 			preparedStatement = connection.prepareStatement(query_final);
+			
+			System.out.println(query_final);
+			
 			resultSet = preparedStatement.executeQuery();
 
-			if(resultSet.next()) {
+			while(resultSet.next()) {
 				int bId = resultSet.getInt("bId");
 				String bName = resultSet.getString("bName");
 				String bTitle = resultSet.getString("bTitle");
@@ -437,13 +470,13 @@ public BDto boardView(String strId) {
 				int bGroup = resultSet.getInt("bGroup");
 				int bStep = resultSet.getInt("bStep");
 				int bIndent = resultSet.getInt("bIndent");
-				int bdId = resultSet.getInt("bdId");
 				
-				BDto dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent, bdId);
+				BDto dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
 				
 				dtos.add(dto);
 			
 			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
