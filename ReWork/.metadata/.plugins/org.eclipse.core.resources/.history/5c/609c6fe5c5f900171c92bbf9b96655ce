@@ -1,5 +1,0 @@
-package com.sosks1313.command;
-
-public class BViewFreeBoardCommand implements BCommand{
-
-}

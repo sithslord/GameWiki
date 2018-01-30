@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <% request.setCharacterEncoding("euc-kr"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -87,7 +89,7 @@ $(function(){
 <body>
 
 	<div id="banner">
-		<a class="hyper" href="board_view.do?bdId=${board_view.bdId }"><h1>${board_view.bdTitle }</h1></a><!-- href 수정요망 -->
+		<a class="hyper" href="board_view.do?bdId=${board_view.bdId }&bdTitle=${board_view.bdTitle }"><h1>${board_view.bdTitle }</h1></a><!-- href 수정요망 -->
 		<div id="serLog">
 			<form action="search" method="post">
 				<input type="text" name="srch" size="30">
@@ -102,15 +104,18 @@ $(function(){
 	
 	<div id="navi">
 	
-		<c:forEach></c:forEach>
-		<a href="board_view.do?bdId=${board_view.bdId }">${board_view.bdTitle }</a></br> <!-- 메뉴 추가 기능 -->
-		<a href="#" data-url="viewfreeboard.do?bdTitle=${board_view.bdTitle }">자유게시판</a></br>
-		<a href="menuMake.do?bdId=${board_view.bdId }">메뉴 편집</a>	
+		<c:forEach items="${menu_view }" var="menu">
+			<a href="#"  data-url="viewMenuContent.do?bdTitle=${board_view.bdTitle }&bdId=${board_view.bdId }&menuTitle=${menu.menuTitle }">${menu.menuTitle }</a><br /><br />
+		
+		</c:forEach>
+		<a href="#" data-url="viewfreeboard.do?bdTitle=${board_view.bdTitle }">자유게시판</a><br />
+		<a href="viewmenu.do?bdTitle=${board_view.bdTitle }&bdId=${board_view.bdId }">메뉴 편집</a><br />
+		<a href="deletecheck.do?bdTitle=${board_view.bdTitle }&bdId=${board_view.bdId }">게시판 삭제</a>
 			
 	</div>
 	
 	<div id="wrap">
-		<iframe id="iframe" src=''  onload="doResize()" frameborder="0" scrolling="no" style="overflow-x:hidden; overflow:auto; width:100%; min-height:500px;"></iframe>
+		<iframe onload="doResize();" id="iframe"  src='' frameborder="0" scrolling="yes" style="overflow-x:hidden; overflow:auto; width:100%; min-height:500px;"></iframe>
 	</div>
 	
 	

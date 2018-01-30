@@ -396,7 +396,7 @@ public class bDao{
 		return dtos;
 	} //메인에 게시판 리스트 불러오기
 	
-public BDto boardView(String strId) {
+	public BDto boardView(String strId) {
 		
 		
 		BDto dto = null;
@@ -492,7 +492,325 @@ public BDto boardView(String strId) {
 	
 		return dtos; //dto 값을 반환한다.
 	}//해당 게시판의 자유게시판 불러오기
+	
+	public ArrayList<BDto> viewMenu(String strTitle){
+
+		ArrayList<BDto> dtos = new ArrayList<BDto>();
+	
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+	
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); //mysql jdbc 드라이버 로딩
+			connection = DriverManager.getConnection("jdbc:mySql://localhost:3306/freeboard", "test", "sky0595");
+		
+			String query = "SELECT * FROM ";
+			String bdTitle_nospaceMenu = strTitle.replaceAll(" ", "") + "_MENU";	
+			String query_final = query + bdTitle_nospaceMenu;
+			preparedStatement = connection.prepareStatement(query_final);
+			
+			System.out.println(query_final);
+			
+			resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()) {
+				String menuTitle = resultSet.getString("menuTitle");
+				String menuContent = resultSet.getString("menuContent");
+				
+				BDto dto = new BDto(menuTitle, menuContent);
+				
+				dtos.add(dto);
+			
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet!=null) resultSet.close();
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+			
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return dtos; 
+	}
+	
+	public void deleteboard(String bdTitle, String bdId) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatement2 = null;
+		PreparedStatement preparedStatement3 = null;
+		
+		System.out.println(bdTitle);
+		System.out.println(bdId);
+
+		
+		String bdTitle_nospace = bdTitle.replaceAll(" ", "");
+		String bdTitle_nospaceMenu = bdTitle_nospace + "_MENU";
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
+		
+			String query ="DELETE FROM newboard WHERE bdId = ?";
+			
+			
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, Integer.parseInt(bdId));
+			
+			int rn = preparedStatement.executeUpdate();
+			
+			String query1 = "DROP TABLE ";
+			String query_droptable = query1 + bdTitle_nospace;
+			
+			System.out.println(query_droptable);
+			
+			preparedStatement2 = connection.prepareStatement(query_droptable);
+			
+			int rn2 = preparedStatement2.executeUpdate();
+			
+			String query_droptablemenu = query1 + bdTitle_nospaceMenu;
+			
+			System.out.println(query_droptablemenu);
+
+			
+			preparedStatement3 = connection.prepareStatement(query_droptablemenu);
+			
+			int rn3 = preparedStatement3.executeUpdate();
 
 
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement3!=null) preparedStatement3.close();
+				if(preparedStatement2!=null) preparedStatement2.close();
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void makeMenu(String bdTitle, String menuL) {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String bdTitle_nospaceMenu = bdTitle.replaceAll(" ", "") + "_MENU";
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); 
+			connection = DriverManager.getConnection("jdbc:mySql://localhost:3306/freeboard", "test", "sky0595");
+			
+			String query = "INSERT INTO ";
+			
+			String query_1 = " (menuTitle, menuDATE) VALUES(?, now()) ";
+			String finalquery = query + bdTitle_nospaceMenu + query_1;
+			preparedStatement = connection.prepareStatement(finalquery);
+
+			preparedStatement.setString(1, menuL);
+
+			int rn = preparedStatement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public void menuDelete(String bdTitle, String menus) {
+		
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String bdTitle_nospaceMenu = bdTitle.replaceAll(" ", "") + "_MENU";
+		
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
+		
+			String query ="DELETE FROM ";
+			String query_1 = " WHERE menuTitle = ?";
+			String finalquery = query + bdTitle_nospaceMenu + query_1;
+			
+			
+			preparedStatement = connection.prepareStatement(finalquery);
+			preparedStatement.setString(1, menus);
+			
+			int rn = preparedStatement.executeUpdate();
+				   
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	public BDto viewMenuContent(String strbdTitle, String strmenuTitle) {
+		
+		BDto dto = null;
+		String bdTitle_nospaceMenu = strbdTitle.replaceAll(" ", "") + "_MENU";
+
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
+		
+			String query = "SELECT * FROM ";
+			String query_1 = " WHERE menuTitle=?";
+			
+			String finalquery = query + bdTitle_nospaceMenu + query_1;
+		
+			preparedStatement = connection.prepareStatement(finalquery);
+			preparedStatement.setString(1, strmenuTitle);
+			resultSet = preparedStatement.executeQuery();
+			
+
+			if(resultSet.next()) {
+				String menuTitle = resultSet.getString("menuTitle");
+				String menuContent = resultSet.getString("menuContent");
+				
+				if(menuContent == null) {
+					menuContent = "<h1>내용이 없습니다. 내용을 편집해 주세요. </h1>";
+				}
+				
+				dto = new BDto(menuTitle, menuContent);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet!=null) resultSet.close();
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+		
+	}
+	
+	public BDto modifyMenuContent(String strbdTitle, String strmenuTitle) {
+		
+		BDto dto = null;
+		String bdTitle_nospaceMenu = strbdTitle.replaceAll(" ", "") + "_MENU";
+
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
+		
+			String query = "SELECT * FROM ";
+			String query_1 = " WHERE menuTitle=?";
+			
+			String finalquery = query + bdTitle_nospaceMenu + query_1;
+		
+			preparedStatement = connection.prepareStatement(finalquery);
+			preparedStatement.setString(1, strmenuTitle);
+			resultSet = preparedStatement.executeQuery();
+			
+
+			if(resultSet.next()) {
+				String menuTitle = resultSet.getString("menuTitle");
+				String menuContent = resultSet.getString("menuContent");
+				
+			
+				dto = new BDto(menuTitle, menuContent);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet!=null) resultSet.close();
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+		
+		
+	}
+	
+	public void modifyMenuContentComplete(String bdTitle, String menuTitle, String menuContent) {
+		
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String bdTitle_nospaceMenu = bdTitle.replaceAll(" ", "") + "_MENU";
+		
+		System.out.println("menuContetn ="  + menuContent);
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
+		
+			String query = "UPDATE ";
+			String query_1 = " SET menuContent=? WHERE menuTitle=?";
+		
+			String finalquery = query + bdTitle_nospaceMenu + query_1;
+
+			preparedStatement = connection.prepareStatement(finalquery);
+			preparedStatement.setString(1, menuContent);
+			preparedStatement.setString(2, menuTitle);
+			
+			int rn = preparedStatement.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 	
 }

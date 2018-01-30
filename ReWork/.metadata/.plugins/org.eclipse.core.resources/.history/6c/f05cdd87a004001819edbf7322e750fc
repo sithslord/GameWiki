@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<% String ctx = request.getContextPath(); //프로젝트 패스 얻어오기 %> 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+<script src="<%=ctx %>/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+
+<input type="text" name="menuL"> <input type="button" onclick="addL()" value="추가">
+
+<form action="menumake.do?dbTitle=?" method="post">
+	<div id="container">
+		
+	
+	</div>
+</form>
+
+<script>
+function addL(){
+	var getText = <% request.getParameter(menuL); %>
+	
+}
+</script>
+
+</body>
+</html>

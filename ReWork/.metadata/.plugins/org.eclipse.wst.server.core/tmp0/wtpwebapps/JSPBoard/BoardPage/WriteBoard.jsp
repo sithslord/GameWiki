@@ -6,30 +6,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
 </head>
 <body>
-<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="<%=ctx %>/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=ctx %>/se2/js/HuskyEZCreator.js" charset="UTF-8"></script>
-<script type="text/javascript" src="<%=ctx %>/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="UTF-8"></script>
 
 
-<form action="writeboard.do" method="post">
-	<textarea name="content" rows="22" id="content" style="width:800px;"></textarea>
+<form action="compModifyMenuContent.do?bdTitle=${bdTitle}&menuTitle=${menuTitle }" method="post">
+	<textarea name="content" rows="22" id="content" style="width:800px;">${modifyMenuContent.menuContent }</textarea>
 	
-	<input type="submit" value="작성하기">
+	<input type="submit" onclick="submitContents(this)" value="작성하기" />
 </form>
 <script type="text/javascript">
-	var oEditors=[];
-	$(function(){
-	
-		nhn.husky.EZCreator.createInIFrame({
-		oAppRef: oEditors,
-		elPlaceHolder: "content",
-		sSkinURI: "<%=ctx %>/se2/SmartEditor2Skin.html",
-		fCreator: "createSEditor2"
-	});
-
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+    oAppRef: oEditors,
+    elPlaceHolder: "content",
+    sSkinURI: "<%=ctx %>/se2/SmartEditor2Skin.html",
+    fCreator: "createSEditor2"
 });
+function submitContents(elClickedObj) {
+    // 에디터의 내용이 textarea에 적용됩니다.
+    oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+    // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+
+
+    try {
+        elClickedObj.form.submit();
+    } catch(e) {}
+}
 </script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+package com.sosks1313.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class BMenuMakeCommand implements BCommand{
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		String bdTitle = request.getParameter("bdTitle");
+		
+		bDao dao = new bDao();
+		
+	}
+
+}

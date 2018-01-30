@@ -16,6 +16,9 @@ public class BDto {
 	
 	String bdTitle;
 	int bdId;
+	
+	String menuTitle;
+	String menuContent;
 
 	
 	public BDto(int bId,
@@ -54,6 +57,14 @@ public class BDto {
 		super();
 		
 		this.bdTitle = bdTitle;
+	}
+	
+	public BDto(String menuTitle, String menuContent) {
+		super();
+		
+		this.menuTitle = menuTitle;
+		this.menuContent = menuContent;
+		
 	}
 	
 	
@@ -142,5 +153,19 @@ public class BDto {
 	public void setbdId(int bdId) {
 		this.bdId = bdId;
 	}
+	public String getmenuTitle() {
+		return menuTitle;
+	}
+	public void setmenuTitle(String menuTitle) {
+		this.menuTitle = menuTitle;
+	}
+	public String getmenuContent() {
+		return menuContent;
+	}
+	public void setmenuContent(String menuContent) {
+		this.menuContent = menuContent;
+	}
+	
+	
 
 }

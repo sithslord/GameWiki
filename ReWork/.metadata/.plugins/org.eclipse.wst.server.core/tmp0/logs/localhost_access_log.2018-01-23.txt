@@ -1,0 +1,12 @@
+127.0.0.1 - - [23/Jan/2018:15:28:23 +0900] "GET / HTTP/1.1" 404 1070
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:15:28:24 +0900] "GET /JSPBoard/BoardPage/MenuMake.jsp HTTP/1.1" 200 877
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:15:28:25 +0900] "GET /favicon.ico HTTP/1.1" 404 1081
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:15:28:28 +0900] "GET /JSPBoard/BoardPage/makemanu.do? HTTP/1.1" 500 1544
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:17:06:17 +0900] "GET /JSPBoard/BoardPage/MenuMake.jsp HTTP/1.1" 200 883
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:17:08:45 +0900] "GET /JSPBoard/BoardPage/MenuMake.jsp HTTP/1.1" 200 746
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:17:15:09 +0900] "GET /JSPBoard/BoardPage/MenuMake.jsp HTTP/1.1" 200 759
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:17:16:33 +0900] "GET /JSPBoard/BoardPage/MenuMake.jsp HTTP/1.1" 200 762
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:17:17:47 +0900] "GET /JSPBoard/BoardPage/MenuMake.jsp HTTP/1.1" 200 806
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:17:17:47 +0900] "GET /js/jquery-3.2.1.min.js HTTP/1.1" 404 1092
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:17:19:06 +0900] "GET /JSPBoard/BoardPage/MenuMake.jsp HTTP/1.1" 200 806
+0:0:0:0:0:0:0:1 - - [23/Jan/2018:17:19:06 +0900] "GET /js/jquery-3.2.1.min.js HTTP/1.1" 404 1092

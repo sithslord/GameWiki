@@ -12,12 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.sosks1313.command.BBoardViewCommand;
 import com.sosks1313.command.BCommand;
 import com.sosks1313.command.BContentCommand;
+import com.sosks1313.command.BDeleteBoardCommand;
+import com.sosks1313.command.BDeleteBoardConfirm;
 import com.sosks1313.command.BDeleteCommand;
+import com.sosks1313.command.BDeleteMenuCommand;
 import com.sosks1313.command.BListCommand;
+import com.sosks1313.command.BMakeMenuCommand;
 import com.sosks1313.command.BModifyCommand;
 import com.sosks1313.command.BModifyComplete;
+import com.sosks1313.command.BModifyMenuContentCommand;
+import com.sosks1313.command.BModifyMenuContentComplete;
 import com.sosks1313.command.BNewsCommand;
 import com.sosks1313.command.BViewFreeBoardCommand;
+import com.sosks1313.command.BViewMenuCommand;
+import com.sosks1313.command.BViewMenuContentCommand;
 import com.sosks1313.command.BWriteCommand;
 import com.sosks1313.command.BWriteViewCommand;
 
@@ -130,7 +138,50 @@ public class MainController extends HttpServlet {
 			command.execute(request, response);
 			
 			viewPage = "/FreeBoard/list.jsp";
+		}else if(comm.equals("viewmenu.do")) {
+			command = new BViewMenuCommand();
+			command.execute(request, response);
+			
+			viewPage = "/BoardPage/MenuMake.jsp";
+		}else if(comm.equals("deleteboard.do")) {
+			command = new BDeleteBoardCommand();
+			command.execute(request, response);
+			
+			viewPage = "main.do";
+		}else if(comm.equals("deletecheck.do")) {
+			command = new BDeleteBoardConfirm();
+			command.execute(request, response);
+			
+			viewPage = "/BoardPage/DeleteBoard.jsp";
+		}else if(comm.equals("makemenu.do")) {
+			command = new BMakeMenuCommand();
+			command.execute(request, response);
+			
+			viewPage = "viewmenu.do";
+		}else if(comm.equals("menudelete.do")) {
+			
+			command = new BDeleteMenuCommand();
+			command.execute(request, response);
+			
+			viewPage="viewmenu.do";
+		}else if(comm.equals("viewMenuContent.do")) {
+			command = new BViewMenuContentCommand();
+			command.execute(request, response);
+			
+			viewPage="/BoardPage/MenuContent.jsp";
+		}else if(comm.equals("modifyMenuContent.do")) {
+			command = new BModifyMenuContentCommand();
+			command.execute(request, response);
+			
+			viewPage="/BoardPage/WriteBoard.jsp";
+		}else if(comm.equals("compModifyMenuContent.do")) {
+			
+			command = new BModifyMenuContentComplete();
+			command.execute(request, response);
+			
+			viewPage="viewMenuContent.do";
 		}
+				
 				
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);  //requestdispatcher = request에 담겨있는 정보를 다른 jsp의 리스폰스에 전달 할 수 있다.
