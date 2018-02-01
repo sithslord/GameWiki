@@ -8,6 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<style>
+img{
+	max-width: 700px;
+}
+
+
+</style>
 <script src="../js/jquery-3.2.1.min.js"></script>
 
 </head>

@@ -1,7 +1,0 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%
-	String img_path="./image";
-	String file_path=".file";
-	String address_name ="¼­¿ï";
-%>

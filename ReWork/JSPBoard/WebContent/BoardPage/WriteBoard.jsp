@@ -14,7 +14,7 @@
 
 
 <form action="compModifyMenuContent.do?bdTitle=${bdTitle}&menuTitle=${menuTitle }" method="post">
-	<textarea name="content" rows="22" id="content" style="width:800px;">${modifyMenuContent.menuContent }</textarea>
+	<textarea name="content" rows="27" id="content" style="width:950px;">${modifyMenuContent.menuContent }</textarea>
 	
 	<input type="submit" onclick="submitContents(this)" value="작성하기" />
 </form>
@@ -26,15 +26,23 @@ nhn.husky.EZCreator.createInIFrame({
     sSkinURI: "<%=ctx %>/se2/SmartEditor2Skin.html",
     fCreator: "createSEditor2"
 });
+
 function submitContents(elClickedObj) {
     // 에디터의 내용이 textarea에 적용됩니다.
     oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-    // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+    // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("content").value를 이용해서 처리하면 됩니다.
 
 
     try {
         elClickedObj.form.submit();
     } catch(e) {}
+}
+//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
+ 
+// textArea에 이미지 첨부
+function pasteHTML(filepath){
+    var sHTML = '<img src="<%=request.getContextPath()%>/se2/upload/'+filepath+'">';
+    oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
 }
 </script>
 </body>

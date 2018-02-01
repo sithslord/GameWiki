@@ -2,16 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="INSERT" key="selection"/>
+		<item value="SE_EditingAreaVerticalResizer" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="insert"/>
-			<item value="textertd"/>
-			<item value="setConfig"/>
-			<item value="rn"/>
+			<item value="SE_EditingAreaVerticalResizer"/>
+			<item value="SE2M_EditingModeChanger"/>
+			<item value="입력조절"/>
+			<item value="img"/>
+			<item value="inputarea img"/>
+			<item value="inputarea"/>
+			<item value="fn"/>
+			<item value="fn-imageUp5"/>
+			<item value="imageup"/>
+			<item value="callfile"/>
+			<item value="html5"/>
+			<item value="fnUploadImage"/>
+			<item value="welBtnConfirm"/>
+			<item value="btn_confirm"/>
+			<item value="call"/>
 		</list>
 		<list key="replacehistory">
 		</list>
@@ -20,7 +31,7 @@
 		<item value="275" key="DIALOG_WIDTH"/>
 		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-24|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
 		<item value="370" key="DIALOG_HEIGHT"/>
-		<item value="553" key="DIALOG_X_ORIGIN"/>
-		<item value="196" key="DIALOG_Y_ORIGIN"/>
+		<item value="28" key="DIALOG_X_ORIGIN"/>
+		<item value="194" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
