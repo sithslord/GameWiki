@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@page import="java.io.FileOutputStream"%>
+
+<%@page import="java.io.OutputStream"%>
+
+<%@page import="java.io.InputStream"%>
+
+<%@page import="java.util.UUID"%>
+
+<%@page import="java.text.SimpleDateFormat"%>
+
+<%@page import="java.io.File"%>
+
+<%@page import="org.apache.commons.fileupload.FileItem"%>
+
+<%@page import="java.util.List"%>
+
+<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+
+
+
+출처: http://roqkffhwk.tistory.com/111 [야근싫어하는 개발자]
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
