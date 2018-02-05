@@ -8,23 +8,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
+<script src="../js/bootstrap.js"></script>
+<script src="../js/jquery-3.2.1.min.js"></script>
 <style>
 img{
-	max-width: 700px;
+	max-width: 800px;
 }
 
 
 </style>
-<script src="../js/jquery-3.2.1.min.js"></script>
 
 </head>
 <body>
+<div class="container-fluid">
 <div>
 ${menuContent_view.menuContent }
 
 </div>
 
-<input type="button" onclick="location.href='modifyMenuContent.do?bdTitle=${bdTitle}&menuTitle=${menuTitle }'" value="편집">
-
+<input class="btn btn-default pull-right btn-sm" type="button" onclick="location.href='modifyMenuContent.do?bdTitle=${bdTitle}&menuTitle=${menuTitle }'" value="편집">
+</div>
 </body>
 </html>

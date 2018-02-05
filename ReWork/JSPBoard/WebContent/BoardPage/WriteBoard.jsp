@@ -6,18 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
+<script src="../js/bootstrap.js"></script>
+
 
 </head>
 <body>
 <script type="text/javascript" src="<%=ctx %>/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=ctx %>/se2/js/HuskyEZCreator.js" charset="UTF-8"></script>
-
-
+<div class="container-fluid">
 <form action="compModifyMenuContent.do?bdTitle=${bdTitle}&menuTitle=${menuTitle }" method="post">
-	<textarea name="content" rows="27" id="content" style="width:950px;">${modifyMenuContent.menuContent }</textarea>
+	<textarea name="content" rows="25" id="content" style="width:780px;">${modifyMenuContent.menuContent }</textarea>
 	
-	<input type="submit" onclick="submitContents(this)" value="작성하기" />
+	<p></p><input class="btn btn-default pull-right btn-sm" type="submit" onclick="submitContents(this)" value="작성하기" />
 </form>
+
+</div>
 <script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({

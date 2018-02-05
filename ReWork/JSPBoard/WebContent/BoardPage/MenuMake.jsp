@@ -8,32 +8,39 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>메뉴편집 페이지</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
+<script src="../js/bootstrap.js"></script>
+
 <script src="<%=ctx %>/js/jquery-3.2.1.min.js"></script>
 <script>
 
 </script>
 </head>
 <body>
+
+<div class="container">
+<h1 align="center">${bdTitle } 메뉴 편집 페이지</h1><br />	
+<center>
+<div class="form-group">
 <form action="makemenu.do?bdTitle=${bdTitle }&bdId=${bdId }" method="post">
-
-	<input type="text" name="menuL"> <input type="submit" value="추가">
-
+	<input type="text" name="menuL" placeholder="메뉴명을 입력해주세요" size="30"> <input type="submit" class="btn btn-default btn-sm" value="추가">
 </form>
-
+</div>
+</center>
 <form action="menudelete.do?bdTitle=${bdTitle }&bdId=${bdId }" method="post">
-<div id="navi">
-<h1>테스트</h1>
+
 <c:forEach items="${menu }" var="dto">
-${dto.menuTitle }<input type="checkbox" value=${dto.menuTitle } name="menu"><br />
+<p style="font-size: 20px">${dto.menuTitle }
+
+<input type="checkbox" value=${dto.menuTitle } name="menu"><br /></p><p></p>
+
 </c:forEach>
 
-<input type="submit" value="삭제하기" ">
-<input type="button" value="편집완료" onclick = "location.href = 'board_view.do?bdId=${bdId }&bdTitle=${bdTitle }'">
+<input class="btn btn-default pull-right" type="submit" value="삭제하기" ">
+<input class="btn btn-default pull-right" type="button" value="편집완료" onclick = "location.href = 'board_view.do?bdId=${bdId }&bdTitle=${bdTitle }'">
 
-
-</div>
 </form>
-
+</div>
 </body>
 </html>

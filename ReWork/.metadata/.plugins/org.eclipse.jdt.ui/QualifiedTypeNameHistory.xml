@@ -19,4 +19,5 @@
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="com.sosks1313.dao.bDao"/>
     <fullyQualifiedTypeName name="com.sosks1313.command.BCommand"/>
+    <fullyQualifiedTypeName name="org.apache.jasper.tagplugins.jstl.core.Out"/>
 </qualifiedTypeNameHistroy>

@@ -7,43 +7,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>${content_view.bTitle }</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
+<script src="../js/bootstrap.js"></script>
+<script src="../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-
-	<table width="1024" cellpadding = "2" cellspacing = "2" border = "0" align="center">
+<div class="container-fluid">
+	<table class="table">
 		<form action="modify.do" method="post">
 		<input type="hidden" name="bId" value="${content_view.bId }">
 		<input type="hidden" name="bdTitle" value="${bdTitle }">
-			
-			<tr>
-				<td>번호</td>
-				<td>${content_view.bId }</td>
 			</tr>
-			<tr>
-				<td>히트</td>
-				<td>${content_view.bHit }</td>
-			<tr>
-				<td>이름</td>
-				<td border="1">${content_view.bName }</td>
-			</tr>
-				<td>제목</td>
+				<td class="text-muted">제목</td>
 				<td>${content_view.bTitle }</td>
 			</tr>
+			
 			<tr>
-				<td>내용</td>
-				<td><textarea readonly rows="10" cols="100">${content_view.bContent }</textarea>
+				<td class="text-muted">작성자</td>
+				<td border="1">${content_view.bName }</td>
+			
+			<tr>
+				<td class="text-muted">내용</td>
+				<td><textarea readonly rows="15" cols="100">${content_view.bContent }</textarea>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="수정">&nbsp;&nbsp;
-					<a href="viewfreeboard.do?bdTitle=${bdTitle }">목록보기</a>&nbsp;&nbsp;
-					<a href="delete.do?bId=${content_view.bId }&bdTitle=${bdTitle }">글 삭제</a>&nbsp;&nbsp;
-					<a href="reply_view.do?bId=${content_view.bId }">답변</a>
+					<input class="btn btn-default pull-right" type="submit" value="수정">&nbsp;&nbsp;
+					<a class="btn btn-default pull-right" href="viewfreeboard.do?bdTitle=${bdTitle }">목록보기</a>&nbsp;&nbsp;
+					<a class="btn btn-default pull-right" href="delete.do?bId=${content_view.bId }&bdTitle=${bdTitle }">글 삭제</a>&nbsp;&nbsp;
+					<a class="btn btn-default pull-right" href="../MainPage/NotReady.jsp">답변</a>
 				</td>
 			</tr>
 		</form>
 	</table>
+	</div>
 
 </body>
 </html>

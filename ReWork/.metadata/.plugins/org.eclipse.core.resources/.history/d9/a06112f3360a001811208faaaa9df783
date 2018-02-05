@@ -1,0 +1,47 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<% String ctx = request.getContextPath(); //프로젝트 패스 얻어오기 %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>메뉴편집 페이지</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
+<script src="../js/bootstrap.js"></script>
+
+<script src="<%=ctx %>/js/jquery-3.2.1.min.js"></script>
+<script>
+
+</script>
+</head>
+<body>
+
+<div class="container">
+<h1 align="center">${bdTitle } 메뉴 편집 페이지</h1><br />	
+<center>
+<div class="form-group">
+<form action="makemenu.do?bdTitle=${bdTitle }&bdId=${bdId }" method="post">
+
+	<input class="form-control" type="text" name="menuL" placeholder="메뉴명을 입력해주세요"> <input type="submit" value="추가">
+
+</form>
+</div>
+</center>
+
+<form action="menudelete.do?bdTitle=${bdTitle }&bdId=${bdId }" method="post">
+<div id="navi">
+<c:forEach items="${menu }" var="dto">
+${dto.menuTitle }<input type="checkbox" value=${dto.menuTitle } name="menu"><br />
+</c:forEach>
+<input type="submit" value="삭제하기" ">
+<input type="button" value="편집완료" onclick = "location.href = 'board_view.do?bdId=${bdId }&bdTitle=${bdTitle }'">
+
+
+</div>
+</form>
+</div>
+</body>
+</html>

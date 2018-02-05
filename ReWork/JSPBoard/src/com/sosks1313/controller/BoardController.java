@@ -64,7 +64,7 @@ public class BoardController extends HttpServlet {
 		if(comm.equals("makeboard.go")) {
 		
 			Connection connection = null;
-			PreparedStatement preparedStatement, preparedStatement2, preparedStatement3, preparedStatement4 = null;
+			PreparedStatement preparedStatement, preparedStatement2, preparedStatement3, preparedStatement4, preparedStatement5, preparedStatement6 = null;
 			ResultSet resultSet = null;
 		
 		
@@ -116,6 +116,29 @@ public class BoardController extends HttpServlet {
 					
 					int rn3 = preparedStatement4.executeUpdate();
 					
+
+					String query6 = "CREATE TABLE ";
+					String query6_1 = "(welcomePage VARCHAR(100) PRIMARY KEY, menuContent TEXT(65500), menuDATE DATETIME DEFAULT CURRENT_TIMESTAMP)charset=euckr";
+					
+					String bdTitle_nospaceMain = bdTitle_nospace + "_Main";
+					
+					String createTableMain = query6 + bdTitle_nospaceMain + query6_1;
+
+					System.out.println(createTableMain);
+					preparedStatement5 = connection.prepareStatement(createTableMain);
+
+					int rn4 = preparedStatement5.executeUpdate();
+					
+
+					String query7 = "INSERT INTO ";
+					String query7_1 = "(welcomePage) VALUE(?)";
+					String insertWelcome = query7 + bdTitle_nospaceMain + query7_1;
+					preparedStatement6 = connection.prepareStatement(insertWelcome);
+					preparedStatement6.setString(1, bdTitle);
+
+					int rn5 = preparedStatement6.executeUpdate();
+					
+					
 					
 					/*
 					String query5 = "UPDATE ";
@@ -142,7 +165,7 @@ public class BoardController extends HttpServlet {
 			}finally {
 				try {
 				
-					if(preparedStatement4!=null) preparedStatement4.close();
+					if(preparedStatement6!=null) preparedStatement6.close();
 					if(resultSet!=null) resultSet.close();
 					if(connection!=null) connection.close();
 				

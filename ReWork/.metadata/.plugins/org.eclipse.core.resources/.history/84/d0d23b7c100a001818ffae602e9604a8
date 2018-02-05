@@ -1,0 +1,5 @@
+package com.sosks1313.jdbc.connection;
+
+public class ConnectionProvider {
+
+}

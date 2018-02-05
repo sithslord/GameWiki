@@ -9,23 +9,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>자유게시판</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
+<script src="../js/bootstrap.js"></script>
 <script src="../js/jquery-3.2.1.min.js"></script>
 
 </head>
 <body>
-
-	<table width="970" cellpadding = "0" cellspacing = "0" border = "1" align="center">
+<div class="container">
+	<table width="970" class="table table-striped">
+		<thead>
 		<tr align="center">
 			<td>번호</td>
-			<td width="100">이름</td>
-			<td width="600">제목</td>
+			<td>이름</td>
+			<td>제목</td>
 			<td>날짜</td>
 			<td>조회수</td>
 		</tr>
+		<thead>
+		
 	<c:forEach items="${bdlist }" var="dto">
 		<tr>
 			<td align="center">${dto.bId }</td>
-			<td>${dto.bName }</td>
+			<td align="center">${dto.bName }</td>
 			<td>
 				<c:forEach begin="1" end="${dto.bIndent }">-</c:forEach>
 				<a href="content_view.do?bId=${dto.bId }&bdTitle=${bdTitle }">${dto.bTitle }</a>
@@ -35,10 +40,10 @@
 		</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="5"><a href="write_view.do?bdTitle=${bdTitle }">글작성</a></td>
+		<td colspan="5"><a class="btn btn-default btn-sm pull-right" href="write_view.do?bdTitle=${bdTitle }">글작성</a></td>
 	</tr>
 	</table>
-
+</div>
 
 </body>
 </html>

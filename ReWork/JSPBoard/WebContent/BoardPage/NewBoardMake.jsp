@@ -4,26 +4,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>새 게시판 만들기</title>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.css">
+<script src="../js/bootstrap.js"></script>
 </head>
 <body>
+<div class="container">
+<h1 align="center">새로운 게시판을 만듭니다.</h1>
 
-	<table width="1024" cellpadding = "2" cellspacing = "2" border = "0" align="center">
-		<form action="makeboard.go" method="post">
-			
-			<tr>
-				<td>제목</td>
-				<td><input type="text" name="bdTitle" size="50"></td>
-			<tr>
-		
-			<tr>
-				<td colspan="2"> <!-- 셀합치기 -->
-					<input type="submit" value="게시판 생성">&nbsp;&nbsp;
-					<a href="main.do">메인페이지로</a>	
-				</td>
-			</tr>	
+		<form class="form-inline" action="makeboard.go" method="post">
+			<div class="form-group">
+				<input class="form-control" size="80" type="text" name="bdTitle" placeholder="만드실 게시판 이름을 넣어주세요">
+				<input class="btn btn-default btn-sm" type="submit" value="게시판 생성">
+				<a class="btn btn-default btn-sm" type="submit" href="main.do">메인페이지로</a>	
+				
+			</div>
 		</form>
-	</table>
+</div>
 
 </body>
 </html>

@@ -9,7 +9,7 @@
 <body>
 	<h1 align="center">중복된 게시판 이름입니다.</h1>
 	
-	<a href="main.do">메인으로 돌아가기</a>
+	<a href="main.do">메인페이지로 돌아가기</a>
 
 </body>
 </html>

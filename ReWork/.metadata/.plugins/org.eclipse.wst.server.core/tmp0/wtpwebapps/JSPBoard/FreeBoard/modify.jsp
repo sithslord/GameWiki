@@ -7,40 +7,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
+<script src="../js/bootstrap.js"></script>
+<script src="../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<table width="1024" cellpadding = "2" cellspacing = "2" border = "0" align="center">
+<div class="container-fluid">
+<table class="table">
+	
 		<form action="modifyComplete.do" method="post">
-		<input type="hidden" name="bId" value="${modify.bId }">
-		<input type="hidden" name="bdTitle" value="${bdTitle }">
-			<tr>
-				<td>번호</td>
-				<td>${modify.bId }</td>
-			</tr>
-			<tr>
-				<td>히트</td>
-				<td>${modify.bHit }</td>
-			<tr>
-				<td>이름</td>
+			<input type="hidden" name="bId" value="${modify.bId }">
+			<input type="hidden" name="bdTitle" value="${bdTitle }">
+			
+			<td>작성자</td>
 				<td border="1">${modify.bName }</td>
 			</tr>
 				<td>제목</td>
-				<td><input type="text" name="bTitle" value="${modify.bTitle }"></td>
+				<td><input type="text" name="bTitle" size="50" value="${modify.bTitle }"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="10" name="bContent" cols="100">${modify.bContent }</textarea>
+				<td><textarea rows="15" name="bContent" cols="100">${modify.bContent }</textarea>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="등록">&nbsp;&nbsp;
-					<a href="viewfreeboard.do?bdTitle=${bdTitle }">목록보기</a>&nbsp;&nbsp;
-					<a href="delete.do?bId=${modify.bId }&bTitle=${bdTitle }">글 삭제</a>&nbsp;&nbsp;
+					<input class="btn btn-default pull-right" type="submit" value="등록">&nbsp;&nbsp;
+					<a class="btn btn-default pull-right" href="viewfreeboard.do?bdTitle=${bdTitle }">목록보기</a>&nbsp;&nbsp;
+					<a class="btn btn-default pull-right" href="delete.do?bId=${modify.bId }&bTitle=${bdTitle }">글 삭제</a>&nbsp;&nbsp;
 				</td>
 			</tr>
 		</form>	
 	</table>
+	</div>
 
 </body>
 </html>

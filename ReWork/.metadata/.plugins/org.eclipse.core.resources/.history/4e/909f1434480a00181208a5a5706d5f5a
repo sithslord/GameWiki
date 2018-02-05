@@ -1,0 +1,5 @@
+package com.sosks1313.command;
+
+public class BModifyWelcomeCommand {
+
+}

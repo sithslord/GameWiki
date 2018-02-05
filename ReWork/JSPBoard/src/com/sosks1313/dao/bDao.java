@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.sosks1313.dto.BDto;
+import com.sosks1313.jdbc.connection.ConnectionProvider;
 
 public class bDao{
 	
@@ -77,7 +78,6 @@ public class bDao{
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); //mysql jdbc 드라이버 로딩
 			connection = DriverManager.getConnection("jdbc:mySql://localhost:3306/freeboard", "test", "sky0595");
-			
 			String query = "INSERT INTO ";
 			
 			String query_1 = " (bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) VALUES(?, ?, ?, 0, (select * from(select max(bId)+1 from ";
@@ -546,14 +546,16 @@ public class bDao{
 		PreparedStatement preparedStatement = null;
 		PreparedStatement preparedStatement2 = null;
 		PreparedStatement preparedStatement3 = null;
-		
+		PreparedStatement preparedStatement4 = null;
+
 		System.out.println(bdTitle);
 		System.out.println(bdId);
 
 		
 		String bdTitle_nospace = bdTitle.replaceAll(" ", "");
 		String bdTitle_nospaceMenu = bdTitle_nospace + "_MENU";
-		
+		String bdTitle_nospaceMain = bdTitle_nospace + "_MAIN";
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
@@ -566,23 +568,26 @@ public class bDao{
 			
 			int rn = preparedStatement.executeUpdate();
 			
+			
+			
 			String query1 = "DROP TABLE ";
 			String query_droptable = query1 + bdTitle_nospace;
-			
-			System.out.println(query_droptable);
-			
 			preparedStatement2 = connection.prepareStatement(query_droptable);
 			
 			int rn2 = preparedStatement2.executeUpdate();
 			
+			
+			
 			String query_droptablemenu = query1 + bdTitle_nospaceMenu;
-			
-			System.out.println(query_droptablemenu);
-
-			
 			preparedStatement3 = connection.prepareStatement(query_droptablemenu);
 			
 			int rn3 = preparedStatement3.executeUpdate();
+			
+			String query_droptablemain = query1 + bdTitle_nospaceMain;
+			preparedStatement4 = connection.prepareStatement(query_droptablemain);
+			
+			int rn4 = preparedStatement4.executeUpdate();
+
 
 
 			
@@ -590,6 +595,7 @@ public class bDao{
 			e.printStackTrace();
 		}finally {
 			try {
+				if(preparedStatement4!=null) preparedStatement3.close();
 				if(preparedStatement3!=null) preparedStatement3.close();
 				if(preparedStatement2!=null) preparedStatement2.close();
 				if(preparedStatement!=null) preparedStatement.close();
@@ -671,7 +677,6 @@ public class bDao{
 		}
 
 	}
-	
 	public BDto viewMenuContent(String strbdTitle, String strmenuTitle) {
 		
 		BDto dto = null;
@@ -722,6 +727,9 @@ public class bDao{
 		return dto;
 		
 	}
+	
+
+	
 	
 	public BDto modifyMenuContent(String strbdTitle, String strmenuTitle) {
 		
@@ -811,6 +819,149 @@ public class bDao{
 		}
 	}
 	
+	public BDto viewWelcomePage(String strbdTitle) {
+		
+		BDto dto = null;
+		String bdTitle = strbdTitle;
+		String bdTitle_nospaceMain = strbdTitle.replaceAll(" ", "") + "_MAIN";
+		
+
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
+		
+			String query = "SELECT menuContent FROM ";
+			String query_1 = " WHERE welcomePage=?";
+			
+			String finalquery = query + bdTitle_nospaceMain + query_1;
+		
+			preparedStatement = connection.prepareStatement(finalquery);
+			preparedStatement.setString(1, bdTitle);
+			resultSet = preparedStatement.executeQuery();
+			
+
+			if(resultSet.next()) {
+				String menuContent = resultSet.getString("menuContent");
+				
+				if(menuContent == null) {
+					menuContent = "<h2>게시판 생성이 끝났습니다.<br />대문 페이지를 수정해 주세요</h2>";
+				}
+				
+				dto = new BDto(menuContent);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet!=null) resultSet.close();
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+		
+	}
+	
+	
+	
+	public BDto modifyWelcome(String strbdTitle) {
+		
+		BDto dto = null;
+		String bdTitle_nospaceMain = strbdTitle.replaceAll(" ", "") + "_MAIN";
+		String bdTitle = strbdTitle;
+
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
+		
+			String query = "SELECT * FROM ";
+			String query_1 = " WHERE welcomePage=?";
+			
+			String finalquery = query + bdTitle_nospaceMain + query_1;
+		
+			preparedStatement = connection.prepareStatement(finalquery);
+			preparedStatement.setString(1, bdTitle);
+			resultSet = preparedStatement.executeQuery();
+			
+
+			if(resultSet.next()) {
+				String menuContent = resultSet.getString("menuContent");
+				
+			
+				dto = new BDto(menuContent);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet!=null) resultSet.close();
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+		
+		
+	}
+	
+	public void modifyWelcomeComplete(String bdTitle, String menuContent) {
+		
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String bdTitle_nospaceMain = bdTitle.replaceAll(" ", "") + "_MAIN";
+		
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freeboard", "test", "sky0595");
+		
+			String query = "UPDATE ";
+			String query_1 = " SET menuContent=? WHERE welcomePage=?";
+		
+			String finalquery = query + bdTitle_nospaceMain + query_1;
+
+			preparedStatement = connection.prepareStatement(finalquery);
+			preparedStatement.setString(1, menuContent);
+			preparedStatement.setString(2, bdTitle);
+			
+			int rn = preparedStatement.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				
+				if(preparedStatement!=null) preparedStatement.close();
+				if(connection!=null) connection.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	
+
 	
 	
 }

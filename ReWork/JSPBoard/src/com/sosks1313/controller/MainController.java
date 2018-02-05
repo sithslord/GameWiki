@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sosks1313.command.BBoardViewCommand;
+import com.sosks1313.command.BBoardWelcomeCommand;
 import com.sosks1313.command.BCommand;
 import com.sosks1313.command.BContentCommand;
 import com.sosks1313.command.BDeleteBoardCommand;
@@ -22,6 +23,8 @@ import com.sosks1313.command.BModifyCommand;
 import com.sosks1313.command.BModifyComplete;
 import com.sosks1313.command.BModifyMenuContentCommand;
 import com.sosks1313.command.BModifyMenuContentComplete;
+import com.sosks1313.command.BModifyWelcomeCommand;
+import com.sosks1313.command.BModifyWelcomeComplete;
 import com.sosks1313.command.BNewsCommand;
 import com.sosks1313.command.BViewFreeBoardCommand;
 import com.sosks1313.command.BViewMenuCommand;
@@ -180,6 +183,23 @@ public class MainController extends HttpServlet {
 			command.execute(request, response);
 			
 			viewPage="viewMenuContent.do";
+		}else if(comm.equals("welcome.do")) {
+			command = new BBoardWelcomeCommand();
+			command.execute(request, response);
+			
+			viewPage="/BoardPage/WelcomePage.jsp";
+		}else if(comm.equals("modifyWelcome.do")) {
+			command = new BModifyWelcomeCommand();
+			command.execute(request, response);
+			
+			viewPage="/BoardPage/ModifyWelcomePage.jsp";
+			
+		}else if(comm.equals("compModifyWelcome.do")) {
+			command = new BModifyWelcomeComplete();
+			command.execute(request, response);
+			
+			viewPage="welcome.do";
+			
 		}
 				
 				
