@@ -5,12 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.css">
+<script src="../js/bootstrap.js"></script>
+
 </head>
 <body>
-
+<div class="container">
 	<h1 align="center">글이 삭제되었습니다.</h1>
 	
-	<a href="viewfreeboard.do?bdTitle=${bdTitle }">목록으로 가기</a>
+	<a class="btn btn-default btn-sm pull-right"  href="viewfreeboard.do?bdTitle=${bdTitle }">목록으로 가기</a>
+</div>
 
 </body>
 </html>

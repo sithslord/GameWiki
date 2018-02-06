@@ -9,6 +9,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>메뉴편집 페이지</title>
+
+<style type="text/css">
+* {
+	margin: 5px;
+	padding: 0;
+}
+</style>
+
 <link rel="stylesheet" href="../css/bootstrap.css">
 <script src="../js/bootstrap.js"></script>
 
@@ -20,7 +28,10 @@
 <body>
 
 <div class="container">
+<nav class="navbar navbar-default">
+
 <h1 align="center">${bdTitle } 메뉴 편집 페이지</h1><br />	
+</nav>
 <center>
 <div class="form-group">
 <form action="makemenu.do?bdTitle=${bdTitle }&bdId=${bdId }" method="post">
@@ -37,7 +48,7 @@
 
 </c:forEach>
 
-<input class="btn btn-default pull-right" type="submit" value="삭제하기" ">
+<input class="btn btn-default pull-right" type="submit" value="삭제하기" >
 <input class="btn btn-default pull-right" type="button" value="편집완료" onclick = "location.href = 'board_view.do?bdId=${bdId }&bdTitle=${bdTitle }'">
 
 </form>

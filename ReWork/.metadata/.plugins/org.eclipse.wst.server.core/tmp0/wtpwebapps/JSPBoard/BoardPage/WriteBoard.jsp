@@ -16,7 +16,7 @@
 <script type="text/javascript" src="<%=ctx %>/se2/js/HuskyEZCreator.js" charset="UTF-8"></script>
 <div class="container-fluid">
 <form action="compModifyMenuContent.do?bdTitle=${bdTitle}&menuTitle=${menuTitle }" method="post">
-	<textarea name="content" rows="25" id="content" style="width:780px;">${modifyMenuContent.menuContent }</textarea>
+	<textarea name="content" rows="25" id="content" style="width:880px;">${modifyMenuContent.menuContent }</textarea>
 	
 	<p></p><input class="btn btn-default pull-right btn-sm" type="submit" onclick="submitContents(this)" value="작성하기" />
 </form>

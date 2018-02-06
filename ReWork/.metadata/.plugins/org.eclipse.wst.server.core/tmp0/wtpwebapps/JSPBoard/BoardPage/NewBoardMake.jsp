@@ -8,11 +8,20 @@
 <script src="../js/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="../css/bootstrap.css">
 <script src="../js/bootstrap.js"></script>
+
+<style type="text/css">
+* {
+	margin: 5px;
+	padding: 0;
+}
+</style>
 </head>
 <body>
 <div class="container">
-<h1 align="center">새로운 게시판을 만듭니다.</h1>
+	<nav class="navbar navbar-default">
 
+<h1 align="center">새로운 게시판을 만듭니다.</h1>
+</nav>
 		<form class="form-inline" action="makeboard.go" method="post">
 			<div class="form-group">
 				<input class="form-control" size="80" type="text" name="bdTitle" placeholder="만드실 게시판 이름을 넣어주세요">

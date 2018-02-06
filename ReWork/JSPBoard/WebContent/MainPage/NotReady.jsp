@@ -5,14 +5,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>죄송합니다</title>
+
+<style type="text/css">
+* {
+	margin: 5px;
+	padding: 0;
+}
+</style>
 <link rel="stylesheet" href="../css/bootstrap.css">
 <script src="../js/bootstrap.js"></script>
 <script src="../js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <div class="container">
+	<nav class="navbar navbar-default">
 
 <h1 align="center">구현되지 않은 기능입니다.</h1>
+</nav>
 <center><input class="btn btn-default btn-lg" type="reset" value="돌아가기" onClick="history.back()"></center>
 
 </div>

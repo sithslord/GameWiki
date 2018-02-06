@@ -22,8 +22,8 @@
 	padding: 0;
 }
 
-#navi {
-	border-right: 1px solid black;
+#wrap {
+	border-left: 1px solid black;
 }
 
 
@@ -53,6 +53,8 @@
 </head>
 <body>
 	<div class="container">
+		<nav class="navbar navbar-default">
+	
 		<div class="row">
 			<div id="banner" class="col-sm-8">
 				<a href="board_view.do?bdId=${board_view.bdId }&bdTitle=${board_view.bdTitle }">
@@ -69,6 +71,8 @@
 				</form>
 			</div>
 		</div>
+		</nav>
+		
 		<div class="row">
 			<div id="navi" class="col-sm-2">
 
@@ -92,7 +96,7 @@
 			<div id="wrap" class="col-sm-9">
 				<iframe onload="doResize();" id="iframe" src='welcome.do?bdTitle=${board_view.bdTitle }' frameborder="0"
 					scrolling="yes"
-					style="overflow-x: hidden; overflow: auto; width: 100%; min-height: 580px;"></iframe>
+					style="overflow-x: hidden; overflow: auto; width: 920px; min-height: 580px;"></iframe>
 			</div>
 		</div>
 

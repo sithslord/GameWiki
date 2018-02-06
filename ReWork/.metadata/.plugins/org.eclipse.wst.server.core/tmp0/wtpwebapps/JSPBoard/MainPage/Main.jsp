@@ -59,6 +59,8 @@ hover {
 </head>
 <body>
 	<div class="container">
+	<nav class="navbar navbar-default">
+	
 		<div class="row">
 			<div id="banner" class="col-sm-8">
 				<a class="hyper" href="main.do" align="center"><h1>게임위키</h1></a>
@@ -74,6 +76,7 @@ hover {
 				</form>
 			</div>
 		</div>
+		</nav>
 	
 	<div class="row">
 		<div id="info" class="col-sm-9">

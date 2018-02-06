@@ -16,7 +16,7 @@
 
 <div class="container-fluid">
 <form action="compModifyWelcome.do?bdTitle=${bdTitle}" method="post">
-	<textarea name="content" rows="25" id="content" style="width:780px;">${modifyWelcome.bdTitle }</textarea>
+	<textarea name="content" rows="25" id="content" style="width:880px;">${modifyWelcome.bdTitle }</textarea>
 	
 	<p></p><input class="btn btn-default pull-right btn-sm" type="submit" onclick="submitContents(this)" value="작성하기" />
 </form>

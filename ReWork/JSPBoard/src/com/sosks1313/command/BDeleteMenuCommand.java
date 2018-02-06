@@ -14,11 +14,13 @@ public class BDeleteMenuCommand implements BCommand{
 		String[] menus = request.getParameterValues("menu");
 		
 		bDao dao = new bDao(); 
-
 		
+		try {
 		for(int i = 0; i < menus.length ; i++) {
 			
 			dao.menuDelete(bdTitle, menus[i]);
+		}}catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
